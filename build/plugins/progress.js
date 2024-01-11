@@ -1,5 +1,5 @@
 import progress from 'vite-plugin-progress'
-
-export default () => {
-  return progress()
+import colors from 'picocolors'
+export default function progressPlugin() {
+  return progress({ format: `${colors.green(colors.bold('Bouilding'))} ${colors.cyan('[:bar]')} :percent` })
 }
