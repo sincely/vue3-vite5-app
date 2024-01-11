@@ -1,8 +1,7 @@
 *.sh
 node_modules
-components.d.ts
-auto-imports.d.ts
-prettier.config.js
+.d.ts
+
 *.md
 *.woff
 *.ttf

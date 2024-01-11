@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   root: true,
   defaultSeverity: 'error',
   plugins: ['stylelint-order', 'stylelint-less'], // CSS 属性顺序规则插件
@@ -7,7 +7,6 @@ module.exports = {
     'stylelint-config-html/html', // html相关配置
     'stylelint-config-html/vue', //  vue相关配置
     'stylelint-config-recess-order', // 对CSS声明进行排序
-    'stylelint-config-prettier' // 关闭Stylelint中与Prettier中会发生冲突的规则
   ],
   rules: {
     // 禁止在覆盖高特异性选择器之后出现低特异性选择器
@@ -51,21 +50,22 @@ module.exports = {
     // 要求或禁止在规则之前的空行
     'rule-empty-line-before': ['always', { ignore: ['after-comment', 'first-nested'] }]
   },
-  ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.tsx', '**/*.ts', '**/*.json', '**/*.md', '**/*.yaml'],
+  ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.tsx', '**/*.ts'],
   overrides: [
     {
-      files: ['*.vue', '**/*.vue', '*.html', '**/*.html'],
+      files: ['**/*.(css|html|vue)'],
       customSyntax: 'postcss-html',
       rules: {
         // 禁止未知的伪类选择器
         'selector-pseudo-class-no-unknown': [true, { ignorePseudoClasses: ['deep', 'global'] }],
         // 禁止未知的伪元素选择器
-        'selector-pseudo-element-no-unknown': [true, { ignorePseudoElements: ['v-deep', 'v-global', 'v-slotted'] }]
+        'selector-pseudo-element-no-unknown': [true, { ignorePseudoElements: ['v-deep', 'v-global', 'v-slotted'] }],
       }
     },
     {
       files: ['*.less', '**/*.less'],
       customSyntax: 'postcss-less',
+      extends: ['stylelint-config-standard-less'],
       rules: {
         'less/color-no-invalid-hex': true,
         'less/no-duplicate-variables': true

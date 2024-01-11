@@ -13,7 +13,11 @@ export default defineConfig(({ mode, command }) => {
       strictPort: false, // 设为false时，若端口已被占用则会尝试下一个可用端口,而不是直接退出
       open: true, // 在服务器启动时自动在浏览器中打开应用程序
       port: 3200, // 指定服务器端口
-      proxy: proxyServer // 设置代理
+      proxy: proxyServer, // 本地跨域代理-> 代理到服务器的接口地址
+      warmup: {
+        // 预热的客户端文件：首页、views、 components
+        clientFiles: ['./index.html', './src/{views,components}/*']
+      }
     },
     build: {
       // 传递给Terser的更多 minify 选项。
@@ -28,7 +32,7 @@ export default defineConfig(({ mode, command }) => {
       assetsInlineLimit: 4096, // 小于此阈值的导入或引用资源将内联为base64编码，以避免额外的http请求。设置为0可以完全禁用此项
       outDir: 'dist', // 指定输出路径,默认dist
       reportCompressedSize: false, // 取消计算文件大小，加快打包速度
-      sourcemap: true, // 构建后是否生成 source map 文件
+      sourcemap: false, // 构建后是否生成 source map 文件
       assetsDir: 'assets', // 静态资源的存放目录
       cssCodeSplit: true, // 启用/禁用CSS代码拆分默认true, 用则所有样式保存在一个css里面
       brotliSize: true, // 启用/禁用brotliSize压缩大小报告
@@ -39,15 +43,13 @@ export default defineConfig(({ mode, command }) => {
       // 自定义底层的Rollup 打包配置
       rollupOptions: {
         output: {
-          manualChunks(id) {
-            if (id.includes('node_modules')) {
-              return id.toString().split('node_modules/')[1].split('/')[0].toString()
-            }
-          },
-          chunkFileNames: (chunkInfo) => {
-            const facadeModuleId = chunkInfo.facadeModuleId ? chunkInfo.facadeModuleId.split('/') : []
-            const fileName = facadeModuleId[facadeModuleId.length - 2] || '[name]'
-            return `js/${fileName}/[name].[hash].js`
+          entryFileNames: 'static/js/[name]-[hash].js',
+          chunkFileNames: 'static/js/[name]-[hash].js',
+          assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
+          compact: true,
+          // 自定义 chunk
+          manualChunks: {
+            vue: ['vue', 'vue-router', 'pinia', '@vueuse/core']
           }
         }
       }
@@ -65,7 +67,7 @@ export default defineConfig(({ mode, command }) => {
       // 导入时想要省略的扩展名列表
       // 不建议使用.vue 影响IDE和类型支持
       // 在Vite中,不建议(实测还是可以配置的)忽略自定义扩展名，因为会影响IDE和类型支持。因此需要完整书写
-      extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', 'vue'] // 默认支持
+      extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'] // 默认支持
     },
     css: {
       preprocessorOptions: {
