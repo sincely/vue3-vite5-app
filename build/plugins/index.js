@@ -6,7 +6,6 @@ import inspect from './inspect' // vue插件检查页面
 import legacy from './legacy' // 浏览器兼容
 import progress from './progress' // 页面进度条
 import vueDevTools from './vueDevtool' // vue开发工具
-import prefetchPlugin from './preload' // 预加载
 import webUpdateNoticePlugin from './updateVersion' // 版本更新
 import restartPlugin from './restart' // 重启服务
 import htmlPlugin from './html' // html插件
@@ -21,14 +20,7 @@ export default function createVitePlugins(viteEnv, isBuild = false) {
   if (isBuild) {
     vitePlugins.push(compression(), legacy(), progress(), webUpdateNoticePlugin(), htmlPlugin())
   } else {
-    vitePlugins.push(
-      inspect(),
-      vueDevTools(viteEnv),
-      prefetchPlugin({
-        pathList: ['./src/views/', './src/components/'],
-        preFix: ''
-      })
-    )
+    vitePlugins.push(inspect(), vueDevTools(viteEnv))
   }
   return vitePlugins
 }
