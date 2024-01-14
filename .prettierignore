@@ -18,6 +18,9 @@ pnpm-lock.yaml
 .cache
 dist
 
+.husky
 node_modules
 /public/*
 components.d.ts
+pnpm-lock.yaml
+.npmrc
