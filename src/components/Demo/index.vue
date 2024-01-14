@@ -1,5 +1,6 @@
 <script setup>
 import { useUserStore } from '@/store/modules/user'
+import axios from 'axios'
 const userStore = useUserStore()
 // const { count, name } = useStore()
 // 直接通过解构的方式获取state中的值是非响应式的！
@@ -27,6 +28,15 @@ const handleChangeStore2 = () => {
 const reset = () => {
   userStore.$reset()
 }
+
+// 发起请求
+const getData = () => {
+  axios.get('/mock/getMapInfo').then((res) => {
+    console.log('res', res)
+  })
+}
+
+getData()
 </script>
 
 <template>
