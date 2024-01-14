@@ -85,9 +85,9 @@ export default defineConfig(({ mode, command }) => {
     plugins: createVitePlugins(viteEnv, command === 'build'),
     // 强制预构建插件包
     optimizeDeps: {
-      force: false, // 是否强制依赖预构建
+      // force: false, // 是否强制依赖预构建
       entries: [], // 检测需要预构建的依赖项
-      include: [], // 默认情况下，不在node_modules中的，链接的包不会预构建
+      include: ['mitt', 'dayjs', 'axios', 'pinia', '@vueuse/core'], // 默认情况下，不在node_modules中的，链接的包不会预构建
       exclude: [] // 排除在优化之外
     }
   })
