@@ -6,7 +6,7 @@ export default {
     'stylelint-config-standard', // stylelint标准配置
     'stylelint-config-html/html', // html相关配置
     'stylelint-config-html/vue', //  vue相关配置
-    'stylelint-config-recess-order', // 对CSS声明进行排序
+    'stylelint-config-recess-order' // 对CSS声明进行排序
   ],
   rules: {
     // 禁止在覆盖高特异性选择器之后出现低特异性选择器
@@ -59,13 +59,12 @@ export default {
         // 禁止未知的伪类选择器
         'selector-pseudo-class-no-unknown': [true, { ignorePseudoClasses: ['deep', 'global'] }],
         // 禁止未知的伪元素选择器
-        'selector-pseudo-element-no-unknown': [true, { ignorePseudoElements: ['v-deep', 'v-global', 'v-slotted'] }],
+        'selector-pseudo-element-no-unknown': [true, { ignorePseudoElements: ['v-deep', 'v-global', 'v-slotted'] }]
       }
     },
     {
       files: ['*.less', '**/*.less'],
       customSyntax: 'postcss-less',
-      extends: ['stylelint-config-standard-less'],
       rules: {
         'less/color-no-invalid-hex': true,
         'less/no-duplicate-variables': true
