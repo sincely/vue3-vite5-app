@@ -1,6 +1,6 @@
 export default {
   // 末尾需要有逗号
-  trailingComma: 'all',
+  trailingComma: 'none',
   // 使用 2 个空格缩进
   tabWidth: 2,
   // 行尾不需要有分号
@@ -16,5 +16,5 @@ export default {
   // 根据显示样式决定 html 要不要折行
   htmlWhitespaceSensitivity: 'ignore',
   // 换行符使用 lf
-  endOfLine: 'lf',
+  endOfLine: 'lf'
 }
