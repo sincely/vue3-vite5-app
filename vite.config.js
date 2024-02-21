@@ -43,9 +43,13 @@ export default defineConfig(({ mode, command }) => {
       // 自定义底层的Rollup 打包配置
       rollupOptions: {
         output: {
+          // 指定 chunks 的入口文件模式
           entryFileNames: 'static/js/[name]-[hash].js',
+          // 对代码分割中产生的 chunk 自定义命名
           chunkFileNames: 'static/js/[name]-[hash].js',
+          // 自定义构建结果中的静态资源名称
           assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
+          // 压缩 Rollup 产生的额外代码
           compact: true,
           // 自定义 chunk
           manualChunks: {

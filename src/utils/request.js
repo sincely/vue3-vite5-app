@@ -2,7 +2,10 @@ import axios from 'axios'
 
 const services = axios.create({
   baseURL: '/api',
-  timeout: 8000
+  // 指定请求超时的毫秒数
+  timeout: 1000,
+  // 表示跨域请求时是否需要使用凭证
+  withCredentials: false
 })
 
 // 请求拦截
