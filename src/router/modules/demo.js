@@ -1,7 +1,1 @@
-export default [
-  {
-    path: '/test',
-    name: 'test',
-    component: () => import('@/views/test')
-  }
-]
+console.log(11)

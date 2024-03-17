@@ -12,7 +12,7 @@ export default function createVitePlugins() {
       imports: ['vue', 'vue-router', '@vueuse/core', 'pinia'],
       include: [/\.[tj]sx?$/, /\.vue$/], // 匹配的文件，也就是哪些后缀的文件需要自动引入
       // 可以选择auto-import.d.ts生成的位置，使用ts建议设置为'src/auto-import.d.ts'
-      dts: true, // 会在根目录生成auto-imports.d.ts，里面可以看到自动导入的api
+      dts: false, // 会在根目录生成auto-imports.d.ts，里面可以看到自动导入的api
       // 解析器配置
       resolvers: [AntDesignVueResolver()], // 第三方ui
       // 根据项目情况配置eslintrc，默认是不开启的
@@ -28,7 +28,7 @@ export default function createVitePlugins() {
       dirs: ['src/components'], // 指定组件位置，默认是src/components
       resolvers: [AntDesignVueResolver({ importStyle: 'less', resolveIcons: true }), IconsResolver()],
       extensions: ['vue'], // 指定扩展名，默认是.vue
-      dts: true // 配置文件生成位置,会在根目录生成./components.d.ts，里面可以看到自动导入的api
+      dts: false // 配置文件生成位置,会在根目录生成./components.d.ts，里面可以看到自动导入的api
     }),
     // 当你使用unplugin-vue-components引入ui库的时候 message, notification 等引入样式不生效 安装vite-plugin-style-import即可
     createStyleImportPlugin({
