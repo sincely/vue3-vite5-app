@@ -4,6 +4,8 @@ import * as parserVue from 'vue-eslint-parser'
 import configPrettier from 'eslint-config-prettier'
 import pluginPrettier from 'eslint-plugin-prettier'
 import { defineFlatConfig } from 'eslint-define-config'
+import { readFile } from 'fs/promises'
+const autoImport = JSON.parse(await readFile(new URL('./.eslintrc-auto-import.json', import.meta.url)))
 
 export default defineFlatConfig([
   {
@@ -87,7 +89,7 @@ export default defineFlatConfig([
   {
     files: ['**/*.vue'],
     languageOptions: {
-      globals: {},
+      globals: autoImport.globals,
       parser: parserVue,
       parserOptions: {
         ecmaFeatures: {

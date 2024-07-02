@@ -19,7 +19,7 @@ export default function createVitePlugins() {
       // 下面两个是其他配置，默认即可
       // 输出一份json文件，默认输出路径为./.eslintrc-auto-import.json
       eslintrc: {
-        enabled: false,
+        enabled: true,
         filepath: './.eslintrc-auto-import.json', // @default './.eslintrc-auto-import.json'
         globalsPropValue: true // @default true 可设置 boolean | 'readonly' | 'readable' | 'writable' | 'writeable'
       }
