@@ -3,7 +3,7 @@ import axios from 'axios'
 const services = axios.create({
   baseURL: '/api',
   // 指定请求超时的毫秒数
-  timeout: 1000,
+  timeout: 1000 * 10, // 接口超时时间  10秒
   // 表示跨域请求时是否需要使用凭证
   withCredentials: false
 })
@@ -26,34 +26,35 @@ services.interceptors.request.use(
   }
 )
 
-// 响应拦截
-services.interceptors.response.use(
+// 响应拦截// 添加响应拦截器
+instance.interceptors.response.use(
   (response) => {
-    const res = response.data
-
-    /**
-     * 这里使用的是自定义 Code 码来做统一的错误处理
-     * code 等于 -1 则代表接口响应出错（可根据自己的业务来进行修改）
-     */
-    if (res.code === -1) {
-      const msg = res.message || '未知错误，请联系管理员查看'
-
-      console.error('[api]', msg)
-
-      return Promise.reject(msg)
+    const { code, data, message } = response.data
+    if (code === 200) {
+      return data
     }
-
-    return res.data
+    Message.error(message)
+    return Promise.reject(new Error(message))
   },
   (error) => {
-    const { response } = error
-    if (response && response.data) {
-      return Promise.reject(error)
+    let message = ''
+    const status = error.response?.status
+    switch (status) {
+      case 401:
+        message = 'token失效，请重新登录'
+        // 这里写退出登录逻辑
+        break
+      case 404:
+        message = '请求地址错误'
+        break
+      case 500:
+        message = '服务器繁忙'
+        break
+      default:
+        message = '网络链接故障'
     }
-    const { message } = error
-    console.error('[api]', message)
+    Message.error(message)
     return Promise.reject(error)
   }
 )
-
 export default services
