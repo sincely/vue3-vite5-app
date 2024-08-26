@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "7.0.1",
-    "@imengyu/vue3-context-menu": "^1.4.2",
     "@vitejs/plugin-vue-jsx": "4.0.1",
     "@vueuse/components": "10.7.2",
     "@vueuse/core": "10.7.2",
