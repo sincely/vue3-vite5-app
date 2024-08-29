@@ -26,7 +26,13 @@ export default function createVitePlugins() {
     }),
     Components({
       dirs: ['src/components'], // 指定组件位置，默认是src/components
-      resolvers: [AntDesignVueResolver({ importStyle: 'less', resolveIcons: true }), IconsResolver()],
+      // importStyle 指是否需要自动随引入加载对应的组件样式，我这里设置为 false，
+      // 因为某些二级组件（比如 DateRangePicker）没办法准确地识别正确路径，他的搜寻路径都是按一级组件来写的，
+      // 所以我改成了全量导入 css。resolveIcons 配置是否对 antd 的图标起作用。
+      // 'css': 默认选项，按需引入组件的 CSS 样式文件。
+      // 'less': 按需引入组件的 Less 样式文件，这样可以在项目中自定义样式变量。
+      // false: 如果设置为 false，则不会自动引入样式文件，意味着你需要手动管理样式引入。
+      resolvers: [AntDesignVueResolver({ importStyle: false, resolveIcons: true }), IconsResolver()],
       extensions: ['vue'], // 指定扩展名，默认是.vue
       dts: false // 配置文件生成位置,会在根目录生成./components.d.ts，里面可以看到自动导入的api
     }),
