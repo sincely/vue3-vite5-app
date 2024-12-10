@@ -2,12 +2,10 @@ import { defineConfig, loadEnv } from 'vite'
 import { resolve } from 'path'
 import createVitePlugins from './build/plugins'
 import { proxyServer } from './build/config/proxy'
-
 export default defineConfig(({ mode, command }) => {
   const viteEnv = loadEnv(mode, process.cwd())
   return defineConfig({
     base: viteEnv.VITE_BASE_URL,
-    publicDir: 'public', // 指定静态资源存放的文件夹
     server: {
       https: false, // 是否开启https
       strictPort: false, // 设为false时，若端口已被占用则会尝试下一个可用端口,而不是直接退出
@@ -73,6 +71,9 @@ export default defineConfig(({ mode, command }) => {
       // 在Vite中,不建议(实测还是可以配置的)忽略自定义扩展名，因为会影响IDE和类型支持。因此需要完整书写
       extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'] // 默认支持
     },
+    define: {
+      __APP_VERSION__: new Date().getTime()
+    },
     css: {
       preprocessorOptions: {
         // 指定传递给css预处理器的选项
@@ -81,10 +82,6 @@ export default defineConfig(({ mode, command }) => {
           javascriptEnabled: true
         }
       }
-    },
-    json: {
-      namedExports: true, // 是否支持从.json文件中进行按名导入
-      stringify: false // 导入的json转换为export default JSON.parse("...")
     },
     plugins: createVitePlugins(viteEnv, command === 'build'),
     // 强制预构建插件包
