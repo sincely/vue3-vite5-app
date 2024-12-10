@@ -8,7 +8,7 @@ import vueDevTools from './vueDevtool' // vue开发工具
 import restartPlugin from './restart' // 重启服务
 import htmlPlugin from './html' // html插件
 import svgIconPlugin from './svgIcon' // svg图标集成
-import versionUpdatePlugin from './versionUpdatePlugin' // 版本更新插件
+import versionUpdatePlugin from './versionUpdate' // 版本更新插件
 
 /**
  * @description  创建vite插件

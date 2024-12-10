@@ -1,8 +1,8 @@
 import router from '@/router'
 import axios from 'axios'
 // 全局前置守卫
-router.beforeEach(async (to, from, next) => {
-  await versionCheck() // 版本监控
+router.beforeEach((to, from, next) => {
+  versionCheck() // 版本监控
   next()
 })
 

@@ -72,6 +72,7 @@ export default defineConfig(({ mode, command }) => {
       extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'] // 默认支持
     },
     define: {
+      // 定义全局变量
       __APP_VERSION__: new Date().getTime()
     },
     css: {
