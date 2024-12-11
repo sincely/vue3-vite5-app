@@ -15,7 +15,7 @@ import versionUpdatePlugin from './versionUpdate' // 版本更新插件
  * @param viteEnv - 环境变量配置
  * @param isBuild - 是否编译
  */
-export default function createVitePlugins(viteEnv, isBuild = false) {
+export default function createVitePlugins(viteEnv, isBuild = false, currentTime) {
   const vitePlugins = [vue(), vueJsx(), ...unplugin(), restartPlugin(), svgIconPlugin()]
   if (isBuild) {
     vitePlugins.push(
@@ -23,7 +23,7 @@ export default function createVitePlugins(viteEnv, isBuild = false) {
       legacy(),
       htmlPlugin(),
       versionUpdatePlugin({
-        version: new Date().getTime() // 定义一个时间戳
+        version: currentTime // 定义一个时间戳
       })
     )
   } else {

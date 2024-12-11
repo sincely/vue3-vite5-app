@@ -2,6 +2,7 @@ import { defineConfig, loadEnv } from 'vite'
 import { resolve } from 'path'
 import createVitePlugins from './build/plugins'
 import { proxyServer } from './build/config/proxy'
+const currentTime = new Date().getTime() // 定义一个时间戳
 export default defineConfig(({ mode, command }) => {
   const viteEnv = loadEnv(mode, process.cwd())
   return defineConfig({
@@ -19,12 +20,12 @@ export default defineConfig(({ mode, command }) => {
     },
     build: {
       // 传递给Terser的更多 minify 选项。
-      terserOptions: {
-        compress: {
-          drop_console: true, // 生产环境时移除console
-          drop_debugger: true // 生产环境时移除debugger
-        }
-      },
+      // terserOptions: {
+      //   compress: {
+      //     drop_console: true, // 生产环境时移除console
+      //     drop_debugger: true // 生产环境时移除debugger
+      //   }
+      // },
       modulePreload: true, // 是否动态引入polyfill，需要引入兼容性相关的文件
       emptyOutDir: true, // 默认true默认情况下，若outDir在root目录下，则Vite会在构建时清空该目录。
       assetsInlineLimit: 4096, // 小于此阈值的导入或引用资源将内联为base64编码，以避免额外的http请求。设置为0可以完全禁用此项
@@ -73,7 +74,7 @@ export default defineConfig(({ mode, command }) => {
     },
     define: {
       // 定义全局变量
-      __APP_VERSION__: new Date().getTime()
+      __APP_VERSION__: currentTime
     },
     css: {
       preprocessorOptions: {
@@ -84,7 +85,7 @@ export default defineConfig(({ mode, command }) => {
         }
       }
     },
-    plugins: createVitePlugins(viteEnv, command === 'build'),
+    plugins: createVitePlugins(viteEnv, command === 'build', currentTime),
     // 强制预构建插件包
     optimizeDeps: {
       // force: false, // 是否强制依赖预构建

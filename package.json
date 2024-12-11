@@ -7,6 +7,7 @@
     "serve": "vite --mode development",
     "build:test": "vite build --mode test",
     "build:production": "vite build --mode production",
+    "preview": "vite preview",
     "eslint:fix": "eslint \"src/**/*.{vue,js}\" --fix",
     "prettier:fix": "prettier --write \"src/**/*.{js,vue,less,css,json,html}\"",
     "stylelint:fix": "stylelint \"**/*.{html,vue,css,less}\" --fix",
