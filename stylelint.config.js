@@ -1,4 +1,5 @@
 export default {
+  // https://juejin.cn/post/7490522567913029672
   root: true,
   defaultSeverity: 'error',
   plugins: ['stylelint-order', 'stylelint-less'], // CSS 属性顺序规则插件
