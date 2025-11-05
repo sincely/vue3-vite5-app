@@ -12,6 +12,7 @@
  * revert：回退代码
  */
 export default {
+  ignores: [(commit) => commit.includes('init')],
   extends: ['@commitlint/config-conventional'],
   rules: {
     // type 类型定义，表示 git 提交的 type 必须在以下类型范围内

@@ -1,4 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+echo "🔍 正在运行代码检查..."
+
 npx lint-staged
+
+echo "✅ 检查通过，可以提交！"
