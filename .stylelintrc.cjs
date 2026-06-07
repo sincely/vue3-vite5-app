@@ -1,13 +1,14 @@
-export default {
+module.exports = {
   // https://juejin.cn/post/7490522567913029672
   root: true,
   defaultSeverity: 'error',
-  plugins: ['stylelint-order', 'stylelint-less'], // CSS 属性顺序规则插件
   extends: [
-    'stylelint-config-standard', // stylelint标准配置
-    'stylelint-config-html/html', // html相关配置
-    'stylelint-config-html/vue', //  vue相关配置
-    'stylelint-config-recess-order' // 对CSS声明进行排序
+    'stylelint-config-standard', // 配置stylelint拓展插件
+    'stylelint-config-html/vue', // 配置 vue 中 template 样式格式化
+    'stylelint-config-standard-scss', // 配置stylelint scss插件
+    'stylelint-config-recommended-vue/scss', // 配置 vue 中 scss 样式格式化
+    'stylelint-config-recess-order' // 配置stylelint css属性书写顺序插件,
+    // 'stylelint-config-prettier', // 配置stylelint和prettier兼容, 注意stylelint大于等于v15是已经不需要此插件
   ],
   rules: {
     // 禁止在覆盖高特异性选择器之后出现低特异性选择器
@@ -51,10 +52,10 @@ export default {
     // 要求或禁止在规则之前的空行
     'rule-empty-line-before': ['always', { ignore: ['after-comment', 'first-nested'] }]
   },
-  ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.tsx', '**/*.ts'],
+  ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.tsx', '**/*.ts', '**/*.json', '**/*.md', '**/*.yaml'],
   overrides: [
     {
-      files: ['**/*.(css|html|vue)'],
+      files: ['**/*.(scss|css|html|vue)'],
       customSyntax: 'postcss-html',
       rules: {
         // 禁止未知的伪类选择器
@@ -64,12 +65,12 @@ export default {
       }
     },
     {
-      files: ['*.less', '**/*.less'],
-      customSyntax: 'postcss-less',
-      extends: ['stylelint-config-standard-less'],
+      files: ['*.scss', '**/*.scss'],
+      customSyntax: 'postcss-scss',
+      extends: ['stylelint-config-standard-scss'],
       rules: {
-        'less/color-no-invalid-hex': true,
-        'less/no-duplicate-variables': true
+        // 'less/color-no-invalid-hex': true,
+        // 'less/no-duplicate-variables': true
       }
     }
   ]

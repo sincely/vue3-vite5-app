@@ -46,7 +46,7 @@ const svgClass = computed(() => {
 })
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .svg-icon {
   vertical-align: middle;
   fill: currentcolor;
