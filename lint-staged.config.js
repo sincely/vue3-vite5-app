@@ -5,5 +5,5 @@ export default {
   '*.vue': ['prettier --write', 'eslint --fix', 'stylelint --fix'],
   'package.json': ['prettier --write'],
   '*.{html,css,less}': ['prettier --write', 'stylelint --fix'],
-  '{!(package)*.json,.!(browserslist)*rc}': ['prettier --write--parser json']
+  '{!(package)*.json,.!(browserslist)*rc}': ['prettier --write --parser json']
 }
